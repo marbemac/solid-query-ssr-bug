@@ -1,0 +1,32 @@
+{
+  "name": "solid-query-ssr-bug",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "VITE_NODE_DEBUG_RUNNER=true vite-node server/main.ts",
+    "build": "yarn run build.client && yarn run build.server",
+    "build.client": "vite build --outDir dist/client",
+    "build.server": "yarn build.server-file && vite build --ssr app/entry.server.tsx --outDir dist/server",
+    "build.server-file": "esbuild --define:process.env.NODE_ENV=\\\"production\\\" --outfile=dist/main.js server/main.ts",
+    "serve": "NODE_ENV=production node dist/main.js"
+  },
+  "dependencies": {
+    "@solidjs/meta": "^0.28.2",
+    "@solidjs/router": "^0.5.0",
+    "@tanstack/solid-query": "^4.15.1",
+    "compression": "^1.7.4",
+    "express": "^4.18.2",
+    "serve-static": "^1.15.0",
+    "solid-js": "^1.6.2"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.7.2",
+    "@types/express": "^4.17.14",
+    "babel-preset-solid": "^1.6.2",
+    "esbuild": "^0.15.13",
+    "vite": "^3.2.3",
+    "vite-node": "^0.25.2",
+    "vite-plugin-solid": "^2.4.0"
+  }
+}
